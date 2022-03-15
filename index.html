@@ -39,14 +39,14 @@
 		});
 	} //end of videoID()
 
-	var url = "https://etrust-live.electronicid.eu/v2/videoid.request";
+	var url = "https://etrust-sandbox.electronicid.eu/v2/videoid.request";
 	var respuesta;
 	var auth;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url);
 
-	xhr.setRequestHeader("Authorization", "Bearer 749f6523-0a04-483c-91d9-54bc8cddd258");
+	xhr.setRequestHeader("Authorization", "Bearer 0c9d0edd-0e40-4eee-9bed-7696d1719514");
 	xhr.setRequestHeader("Content-Type", "application/json");
 
 	xhr.onreadystatechange = function () {
@@ -55,7 +55,7 @@
 	      responseReady();
 	   }};
 
-	var data = `{"process":"Attended", "rauthorityId":"356c5d26-4e98-4b7a-91a4-af168b7ae07c"}`;
+	var data = `{"process":"Attended", "rauthorityId":"e88137a4-f7c3-45d1-b07b-4aa250c058f0"}`;
 
 	xhr.send(data);
 
