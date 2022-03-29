@@ -1,64 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="https://etrust-live.electronicid.eu/v2/js/videoidattended.js"></script>
+	<title></title>
 </head>
 <body>
 
-<h1>VideoID</h1>
-<div id="video" style="height: 250px; width: 500px; background-color: black;"></div>
-​
-<script type="text/javascript">
+	<div id="video" style="width: 1000px; height: 600px"></div>
 
-	function responseReady(){
-		console.log(respuesta);
-		auth = JSON.parse(respuesta).authorization;
-		console.log(auth);
-		videoID(auth);
-	} //end of responseReady()
-
-	function videoID(auth){
-		var videoId = EID.videoIDAttended('#video', { lang: "en" });
-
-		videoId.turnOn();
-
-		//{"id":62,"country":"ESP","countryName":"Spain","type":"IdCard","name":"Identity Card","kind":"DNI","icao":"TD1","scanWidth":480},
-		videoId.start({
-		authorization: auth,
-		idType: "210"
-		});
-
-		videoId.on("completed",
-		   function (video) {
-		   	  videoId.turnOff();
-		      alert('New video: ' + video.id);
-		});
-		videoId.on("failed",
-		   function (error) {
-		      alert("VideoId Failed");
-		});
-	} //end of videoID()
-
-	var url = "https://etrust-sandbox.electronicid.eu/v2/videoid.request";
-	var respuesta;
-	var auth;
-
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url);
-
-	xhr.setRequestHeader("Authorization", "Bearer 0c9d0edd-0e40-4eee-9bed-7696d1719514");
-	xhr.setRequestHeader("Content-Type", "application/json");
-
-	xhr.onreadystatechange = function () {
-	   if (xhr.readyState === 4) {
-	      respuesta = xhr.responseText;
-	      responseReady();
-	   }};
-
-	var data = `{"process":"Attended", "rauthorityId":"e88137a4-f7c3-45d1-b07b-4aa250c058f0"}`;
-
-	xhr.send(data);
-
+	<script type="text/javascript" src="https://etrust-sandbox.electronicid.eu/v2/js/videoscan.js"></script>
+	<script>
+	function prueba(){
+		alert("FUNCIONA");
+	}
+var videoScan = EID.videoScan('#video', {
+ lang: "en"
+});
+videoScan.turnOn();
+videoScan.start({
+ playsinline: true,
+ authorization:"gXq41xxxT4CQNMMR1C8zGSc6I6DWhw1X5hQFcyZnEZTbLlSPXyD-8rxlPkH_3sY_B9CPNXFKhn4zm39-u_5mlvjrNgv6zoV7anP3ki-PN6U=",
+ idType: "62"
+});
+videoScan.on("completed",
+ function (video) {
+ videoScan.turnOff();
+ alert('New video!!! Id: ' + video.id);
+ prueba();
+});
+videoScan.on("failed",
+ function (error) {
+ alert("VideoId Failed");
+});
 </script>
 
 </body>
